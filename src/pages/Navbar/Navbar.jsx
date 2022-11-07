@@ -3,7 +3,9 @@ import React from 'react';
 const Navbar = () => {
     return (
         <div>
-            <h3>our navbar</h3>
+             <h1 className="text-5xl font-bold underline">
+      Hello world!
+    </h1>
         </div>
     );
 };
