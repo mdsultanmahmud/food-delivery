@@ -3,23 +3,43 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faLock, faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
+import toast from 'react-hot-toast';
 const Login = () => {
-    const {user} = useContext(AuthContext)
+    const { LoginUser } = useContext(AuthContext)
     const [status, setStatus] = useState(false)
+    const handleUserLogin = e => {
+        e.preventDefault()
+        const form = e.target
+        const email = form.email.value
+        const password = form.password.value
+        LoginUser(email, password)
+            .then(res => {
+                const user = res.user
+                if (user) {
+                    toast.success('Login successfully!')
+                    console.log(user)
+                    form.reset()
+                }
+            })
+            .catch(e => {
+                console.log(e)
+                toast.error(e.message)
+            })
+    }
     return (
         <div className='grid grid-cols-1 md:grid-cols-2 m-10 shadow-2xl rounded-3xl '>
 
             <div className='p-5 grid place-items-center'>
                 <div>
                     <h2 className='text-center my-5 text-green-700 font-bold text-2xl'>Please Sign In</h2>
-                    <form className='w-[250px] md:w-[300px]'>
+                    <form onSubmit={handleUserLogin} className='w-[250px] md:w-[300px]'>
                         <div className="form-control relative mb-3">
                             <FontAwesomeIcon className='absolute top-1/3 left-2 w-5 h-5 text-gray-400 ml-3' icon={faEnvelope}></FontAwesomeIcon>
-                            <input required type="email" placeholder="Email" className="input bg-gray-100  w-full max-w-xs pl-12" />
+                            <input required name='email' type="email" placeholder="Email" className="input bg-gray-100  w-full max-w-xs pl-12" />
                         </div>
                         <div className="form-control relative mb-3">
                             <FontAwesomeIcon className='absolute top-1/3 left-2 w-5 h-5 text-gray-400 ml-3' icon={faLock}></FontAwesomeIcon>
-                            <input required type={status ? 'text' : 'password'} placeholder="Password" className="input bg-gray-100  w-full max-w-xs pl-12" />
+                            <input required name='password' type={status ? 'text' : 'password'} placeholder="Password" className="input bg-gray-100  w-full max-w-xs pl-12" />
                             {
                                 status ?
                                     <FontAwesomeIcon onClick={() => setStatus(!status)} className='absolute top-1/3 right-5 w-5 h-5 text-gray-400 ml-3 cursor-pointer' icon={faEyeSlash}></FontAwesomeIcon>
