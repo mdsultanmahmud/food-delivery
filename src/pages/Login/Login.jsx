@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faLock, faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthProvider';
 const Login = () => {
+    const {user} = useContext(AuthContext)
     const [status, setStatus] = useState(false)
     return (
         <div className='grid grid-cols-1 md:grid-cols-2 m-10 shadow-2xl rounded-3xl '>
