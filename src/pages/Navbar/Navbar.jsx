@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const allMenu = <>
-        <li><Link className='font-bold text-white' to={'/'}>Home</Link></li>
         <li><Link className='font-bold text-white' to={'/services'}>Services</Link></li>
         <li><Link className='font-bold text-white' to={'/blog'}>Blog</Link></li>
+        <li><Link className='font-bold text-white' to={'/reviews'}>My Review</Link></li>
+        <li><Link className='font-bold text-white' to={'/addServices'}>Add Service</Link></li>
         <li><Link className='font-bold text-white' to={'/register'}>Register</Link></li>
 
     </>
