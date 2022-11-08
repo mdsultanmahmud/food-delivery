@@ -1,12 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthProvider';
 
 const Navbar = () => {
+    const { user, userLogout } = useContext(AuthContext)
+    const handleUserLogout = () => {
+        userLogout()
+            .then(res => {
+                toast.success('successfully Logout!')
+            })
+            .catch(e => {
+                console.log(e)
+                toast.error(e.message)
+            })
+    }
     const allMenu = <>
         <li><Link className='font-bold text-white' to={'/services'}>Services</Link></li>
         <li><Link className='font-bold text-white' to={'/blog'}>Blog</Link></li>
-        <li><Link className='font-bold text-white' to={'/reviews'}>My Review</Link></li>
-        <li><Link className='font-bold text-white' to={'/addServices'}>Add Service</Link></li>
+        {
+            user?.uid &&
+            <>
+                <li><Link className='font-bold text-white' to={'/reviews'}>My Review</Link></li>
+                <li><Link className='font-bold text-white' to={'/addServices'}>Add Service</Link></li>
+            </>
+        }
         <li><Link className='font-bold text-white' to={'/register'}>Register</Link></li>
 
     </>
@@ -29,8 +47,17 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <li className='list-none mx-2 bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 px-6 py-3 rounded hover:text-white cursor-pointer'><Link className='font-bold'>Logout</Link></li>
-                <li className='list-none mx-2 bg-gradient-to-r from-red-400 to-blue-500 hover:from-blue-500 hover:to-yellow-500 px-6 py-3 rounded hover:text-white cursor-pointer'><Link className='font-bold' to={'/login'}>Login</Link></li>
+                {
+                    user?.uid ?
+                        <>
+                            <span>{user.displayName}</span>
+                            <li onClick={handleUserLogout} className='list-none mx-2 bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 px-6 py-3 rounded hover:text-white cursor-pointer'><Link className='font-bold'>Logout</Link></li>
+                        </>
+                        :
+                        <li className='list-none mx-2 bg-gradient-to-r from-red-400 to-blue-500 hover:from-blue-500 hover:to-yellow-500 px-6 py-3 rounded hover:text-white cursor-pointer'><Link className='font-bold' to={'/login'}>Login</Link></li>
+                }
+
+
             </div>
         </div>
     );
