@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Link } from 'react-router-dom';
 import { faEnvelope, faLock, faUser, faImage, faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons'
 const Register = () => {
     const [status, setStatus] = useState(false)
@@ -10,13 +11,13 @@ const Register = () => {
                 <div>
                     <h2 className='text-3xl my-2 text-white font-bold '>Welcome Back!</h2>
                     <p className='text-sm text-gray-300 my-2'>To keep connected with us please login <br /> with your personal info</p>
-                    <button className='block mx-auto text-2xl my-4 py-3 px-10 rounded-2xl text-gray-300 border border-gray-300'>Sign In</button>
+                    <Link to='/login'><button className='block mx-auto text-2xl my-4 py-3 px-10 rounded-2xl text-gray-300 border border-gray-300'>Sign In</button></Link>
                 </div>
             </div>
             <div className='p-5 grid place-items-center'>
                 <div>
                     <h2 className='text-center my-5 text-green-700 font-bold text-2xl'>Create Account</h2>
-                    <form className='w-[300px]'>
+                    <form className='w-[250px] md:w-[300px]'>
                         <div className="form-control relative mb-3">
                             <FontAwesomeIcon className='absolute top-1/3 left-2 w-5 h-5 text-gray-400 ml-3' icon={faUser}></FontAwesomeIcon>
                             <input type="text" placeholder="Name" className="input bg-gray-100  w-full max-w-xs pl-12" />
