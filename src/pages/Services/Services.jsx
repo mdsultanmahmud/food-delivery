@@ -4,7 +4,6 @@ import SingleService from './SingleService';
 
 const Services = () => {
     const services = useLoaderData()
-    console.log(services[0])
     return (
         <div>
             <h3 className='text-center text-2xl my-6 text-orange-600 font-bold'>Our all services</h3>
