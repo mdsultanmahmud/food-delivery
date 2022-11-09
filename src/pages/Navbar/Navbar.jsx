@@ -50,7 +50,7 @@ const Navbar = () => {
                 {
                     user?.uid ?
                         <>
-                            <span>{user.displayName}</span>
+                        <img title={user?.displayName} src={user?.photoURL} className='w-12 h-12 rounded-full mr-2' alt="" />
                             <li onClick={handleUserLogout} className='list-none mx-2 bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 px-6 py-3 rounded hover:text-white cursor-pointer'><Link className='font-bold'>Logout</Link></li>
                         </>
                         :

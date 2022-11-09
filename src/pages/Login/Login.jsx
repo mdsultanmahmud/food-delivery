@@ -42,9 +42,9 @@ const Login = () => {
                             <input required name='password' type={status ? 'text' : 'password'} placeholder="Password" className="input bg-gray-100  w-full max-w-xs pl-12" />
                             {
                                 status ?
-                                    <FontAwesomeIcon onClick={() => setStatus(!status)} className='absolute top-1/3 right-5 w-5 h-5 text-gray-400 ml-3 cursor-pointer' icon={faEyeSlash}></FontAwesomeIcon>
-                                    :
                                     <FontAwesomeIcon onClick={() => setStatus(!status)} className='absolute top-1/3 right-5 w-5 h-5 text-gray-400 ml-3 cursor-pointer' icon={faEye}></FontAwesomeIcon>
+                                    :
+                                    <FontAwesomeIcon onClick={() => setStatus(!status)} className='absolute top-1/3 right-5 w-5 h-5 text-gray-400 ml-3 cursor-pointer' icon={faEyeSlash}></FontAwesomeIcon>
                             }
 
                         </div>

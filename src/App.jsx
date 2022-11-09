@@ -8,6 +8,7 @@ import Login from "./pages/Login/Login"
 import Register from "./pages/Register/Register"
 import Reviews from "./pages/Reviews/Reviews"
 import Services from "./pages/Services/Services"
+import ServiceDetails from "./sharedPages/ServiceDetails/ServiceDetails"
 
 function App() {
   const router = createBrowserRouter([
@@ -21,7 +22,8 @@ function App() {
           },
           {
             path:'/services',
-            element:<Services></Services>
+            element:<Services></Services>,
+            loader: () => fetch('http://localhost:5000/services')
           },
           {
             path:'/blog',
@@ -42,6 +44,10 @@ function App() {
           {
             path:'/reviews',
             element:<Reviews></Reviews>
+          },
+          {
+            path:'/serviceDetails/:id',
+            element:<ServiceDetails></ServiceDetails>
           }
         ]
       }
