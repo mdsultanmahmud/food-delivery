@@ -1,7 +1,6 @@
 import React from 'react';
 
 const ShowReview = ({ servRev }) => {
-    console.log(servRev)
     const { reviewMsg, reviewrImg, reviewtime, userName} = servRev
     return (
         <div className='bg-gray-100 shadow-2xl my-5 p-5'>

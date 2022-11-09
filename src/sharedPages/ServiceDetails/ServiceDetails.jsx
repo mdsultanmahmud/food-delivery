@@ -18,7 +18,6 @@ const ServiceDetails = () => {
 
             })
     }, [])
-    console.log(serviceReview)
     return (
         <div>
             <div className='grid gap-6 place-items-center grid-cols-1 md:grid-cols-2 my-5'>
