@@ -1,15 +1,34 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/AuthProvider';
 import DisplayReview from './DisplayReview';
-
+import toast from 'react-hot-toast';
 const Reviews = () => {
     const [reviews, setReviews] = useState([])
+    const [deleteStatus, setDeleteStatus] = useState(false)
     const { user } = useContext(AuthContext)
+
+    const handleDeleteReview = (id) => {
+        const agreed = prompt('For deleting this review, please write CONFIRM');
+        if (agreed === 'CONFIRM') {
+            fetch(`http://localhost:5000/reviewWithGmail/${id}`, {
+                method: 'DELETE'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    if (data.deletedCount > 0) {
+                        toast.success('Your Reviews delete from the database!')
+                        setDeleteStatus(!deleteStatus)
+                    }
+                })
+        }
+
+    }
     useEffect(() => {
         fetch(`http://localhost:5000/reviewWithGmail?email=${user?.email}`)
             .then(res => res.json())
             .then(data => setReviews(data))
-    }, [])
+    }, [deleteStatus])
     return (
         <div>
 
@@ -18,7 +37,8 @@ const Reviews = () => {
                 {
                     reviews.map(rev => <DisplayReview
                         key={rev._id}
-                        singleRev = {rev}
+                        singleRev={rev}
+                        handleDeleteReview={handleDeleteReview}
                     ></DisplayReview>)
                 }
 
