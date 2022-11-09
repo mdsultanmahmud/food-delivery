@@ -8,6 +8,7 @@ import Login from "./pages/Login/Login"
 import Register from "./pages/Register/Register"
 import Reviews from "./pages/Reviews/Reviews"
 import Services from "./pages/Services/Services"
+import PrivateRoutes from "./Routes/PrivateRoutes"
 import ServiceDetails from "./sharedPages/ServiceDetails/ServiceDetails"
 
 function App() {
@@ -39,11 +40,11 @@ function App() {
           },
           {
             path:'/addServices',
-            element:<AddService></AddService>
+            element:<PrivateRoutes><AddService></AddService></PrivateRoutes>
           },
           {
             path:'/reviews',
-            element:<Reviews></Reviews>
+            element:<PrivateRoutes><Reviews></Reviews></PrivateRoutes>
           },
           {
             path:'/serviceDetails/:id',

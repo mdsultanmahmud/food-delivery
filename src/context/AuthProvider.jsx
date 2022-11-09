@@ -1,41 +1,47 @@
 import React, { createContext, useEffect, useState } from 'react';
 import app from '../firebase/firebase.config';
-import {createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile} from 'firebase/auth'
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth'
 export const AuthContext = createContext()
 const auth = getAuth(app)
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
     const [user, setUser] = useState({})
-
-    const createPasswordBasedUser = (email,password) =>{
+    const [loading, setLoading] = useState(true)
+    const createPasswordBasedUser = (email, password) => {
+        setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
-    const userUpdated = (userProfile) =>{
+    const userUpdated = (userProfile) => {
+        setLoading(true)
         return updateProfile(auth.currentUser, userProfile)
     }
 
-    const LoginUser = (email, password) =>{
+    const LoginUser = (email, password) => {
+        setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
 
-    const userLogout = () =>{
+    const userLogout = () => {
+        setLoading(true)
         return signOut(auth)
     }
 
-    useEffect(() =>{
-        const unsubscribe = onAuthStateChanged(auth, currentUser =>{
-            if(user){
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, currentUser => {
+            if (user) {
                 setUser(currentUser)
-            }else{
+                setLoading(false)
+            } else {
                 setUser({})
+                setLoading(false)
             }
         })
 
         return () => unsubscribe()
-    } ,[])
-    const authInfo = {user, createPasswordBasedUser, userUpdated, LoginUser, userLogout}
+    }, [])
+    const authInfo = { user, loading, createPasswordBasedUser, userUpdated, LoginUser, userLogout }
     return (
-        <AuthContext.Provider value={authInfo}> 
+        <AuthContext.Provider value={authInfo}>
             {children}
         </AuthContext.Provider>
     );

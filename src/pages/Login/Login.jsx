@@ -1,12 +1,15 @@
 import React, { useContext, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faLock, faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons'
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
 import toast from 'react-hot-toast';
 const Login = () => {
     const { LoginUser } = useContext(AuthContext)
     const [status, setStatus] = useState(false)
+    const location = useLocation()
+    const navigate = useNavigate()
+    const from = location.state?.from?.pathname || "/";
     const handleUserLogin = e => {
         e.preventDefault()
         const form = e.target
@@ -19,6 +22,7 @@ const Login = () => {
                     toast.success('Login successfully!')
                     console.log(user)
                     form.reset()
+                    navigate(from, {replace: true})
                 }
             })
             .catch(e => {
