@@ -1,11 +1,24 @@
-import React, { useContext } from 'react';
-import { useLoaderData,Link } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { useLoaderData, Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
 import ReviewForm from './ReviewForm';
+import ShowReview from './showReview';
 const ServiceDetails = () => {
+    const [serviceReview, setServiceReview] = useState([])
     const { user } = useContext(AuthContext)
     const service = useLoaderData()
     const { name, title, description, review, _id, picture, rating, balance, time } = service
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/reviewWithId/${_id}`)
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data)
+                setServiceReview(data)
+
+            })
+    }, [])
+    console.log(serviceReview)
     return (
         <div>
             <div className='grid gap-6 place-items-center grid-cols-1 md:grid-cols-2 my-5'>
@@ -21,7 +34,7 @@ const ServiceDetails = () => {
                         <div className="rating rating-md ml-3">
                             <input type="radio" name="rating-7" className="mask mask-star-2 bg-orange-400" />
                             <input type="radio" name="rating-7" className="mask mask-star-2 bg-orange-400" />
-                            <input type="radio" name="rating-7" className="mask mask-star-2 bg-orange-400"  />
+                            <input type="radio" name="rating-7" className="mask mask-star-2 bg-orange-400" />
                             <input type="radio" name="rating-7" className="mask mask-star-2 bg-orange-400" />
                             <input type="radio" name="rating-7" className="mask mask-star-2 bg-orange-400" />
                         </div>
@@ -35,14 +48,23 @@ const ServiceDetails = () => {
                 <h3 className='text-center text-orange-600 text-2xl font-bold'>All review about this foods</h3>
                 <div className='w-full md:w-3/4 mx-auto p-5 my-10'>
                     <div>
-                        <h3>show all review</h3>
+                        {
+                            serviceReview.length > 0 ?
+
+                            serviceReview.map(srv => <ShowReview
+                                key={srv._id}
+                                servRev={srv}
+                            ></ShowReview>)
+                            :
+                                <p className='text-sm font-semibold text-gray-500'>No review added about this product.</p>
+                        }
                     </div>
-                    <div className='my-5'>
+                    <div className='my-10'>
                         {
                             user?.email ?
-                                <ReviewForm key={_id} service = {service}></ReviewForm>
+                                <ReviewForm key={_id} service={service}></ReviewForm>
                                 :
-                                <p className='text-gray-600 text-xl font-semibold'>Please <Link className='mx-3 text-red-700 font-bold underline' to='/login'>login </Link> for add any review about this product</p>
+                                <p className='text-gray-600 text-xl font-semibold'>Please <Link className='mx-3 text-red-700 font-bold underline' to='/login'>login </Link> for add review about this product</p>
                         }
 
                     </div>
