@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
-
+import logo from '../../assets/logo.jpg'
 const Navbar = () => {
     const { user, userLogout } = useContext(AuthContext)
     const handleUserLogout = () => {
@@ -39,7 +39,10 @@ const Navbar = () => {
                         {allMenu}
                     </ul>
                 </div>
-                <Link to={'/'} className="normal-case text-xl md:text-2xl text-red-500 font-bold ">Fast <span className='text-pink-900'>Delivery</span></Link>
+                <Link to={'/'} className="normal-case flex text-xl md:text-2xl text-red-500 font-bold ">
+                    <img className='w-10 h-10 rounded-full mr-2' src={logo} alt="" />
+                Fast <span className='text-pink-900 '>Delivery</span>
+                </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
