@@ -1,10 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
+import 'react-photo-view/dist/react-photo-view.css';
 const SingleService = ({ service }) => {
-    const { balance, title, name, picture, review, time,_id,description } = service
+    const { balance, title, name, picture, review, time, _id, description } = service
     return (
         <div className="card  bg-base-100 shadow-xl">
-            <figure><img className='h-[300px]' src={picture} alt={name} /></figure>
+            <PhotoProvider>
+                <PhotoView src={picture}>
+                    <figure><img className='h-[300px]' src={picture} alt={name} /></figure>
+                </PhotoView>
+            </PhotoProvider>
+
             <div className="card-body">
                 <h2 className="card-title text-bold text-2xl capitalize">{name}</h2>
                 <p>{title}</p>
@@ -14,7 +21,7 @@ const SingleService = ({ service }) => {
                     <p className='text-sm text-gray-500'>Delivered time: {time} min</p>
                     <div className="rating rating-sm">
                         <input type="radio" name="rating-6" className="mask mask-star-2 bg-orange-400" />
-                        <input type="radio" name="rating-6" className="mask mask-star-2 bg-orange-400"  />
+                        <input type="radio" name="rating-6" className="mask mask-star-2 bg-orange-400" />
                         <input type="radio" name="rating-6" className="mask mask-star-2 bg-orange-400" />
                         <input type="radio" name="rating-6" className="mask mask-star-2 bg-orange-400" />
                         <input type="radio" name="rating-6" className="mask mask-star-2 bg-orange-400" />

@@ -19,7 +19,7 @@ const Service = () => {
                 > </ServiceCard>)
             }   
             </div>
-            <Link to='/services'><button className='btn btn-outline outline-stone-800 block mx-auto'>Show All Services</button></Link>
+            <Link to='/services'><button className='btn btn-outline outline-stone-800 block mx-auto'>Show All</button></Link>
         </div>
     );
 };
