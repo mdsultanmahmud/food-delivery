@@ -31,8 +31,13 @@ const Reviews = () => {
     }, [deleteStatus])
     return (
         <div>
+            {
+                reviews.length > 0 ?
+                    <h3 className='text-center my-5 text-2xl font-bold text-orange-700'>Your all Reviews</h3>
+                    :
+                    <h3 className='text-center my-5 text-2xl font-bold text-orange-700'>No review were added</h3>
+            }
 
-            <h3 className='text-center my-5 text-2xl font-bold text-orange-700'>Your all Reviews</h3>
             <div className='w-3/4 mx-auto'>
                 {
                     reviews.map(rev => <DisplayReview

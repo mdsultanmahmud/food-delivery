@@ -3,6 +3,8 @@ import { useLoaderData, Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
 import ReviewForm from './ReviewForm';
 import ShowReview from './showReview';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
+import 'react-photo-view/dist/react-photo-view.css';
 const ServiceDetails = () => {
     const [serviceReview, setServiceReview] = useState([])
     const { user } = useContext(AuthContext)
@@ -22,7 +24,12 @@ const ServiceDetails = () => {
         <div>
             <div className='grid gap-6 place-items-center grid-cols-1 md:grid-cols-2 my-5'>
                 <div className='w-full p-5'>
-                    <img className='rounded-lg w-full' src={picture} alt={title} />
+                    <PhotoProvider>
+                        <PhotoView src={picture}>
+                        <img className='rounded-lg w-full' src={picture} alt={title} />
+                        </PhotoView>
+                    </PhotoProvider>
+                    
                 </div>
                 <div className='w-full p-5'>
                     <h2 className='font-bold text-2xl text-orange-600 uppercase my-5'>{name}</h2>
@@ -50,11 +57,11 @@ const ServiceDetails = () => {
                         {
                             serviceReview.length > 0 ?
 
-                            serviceReview.map(srv => <ShowReview
-                                key={srv._id}
-                                servRev={srv}
-                            ></ShowReview>)
-                            :
+                                serviceReview.map(srv => <ShowReview
+                                    key={srv._id}
+                                    servRev={srv}
+                                ></ShowReview>)
+                                :
                                 <p className='text-sm font-semibold text-gray-500'>No review added about this product.</p>
                         }
                     </div>

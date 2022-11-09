@@ -1,11 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link, useNavigate } from 'react-router-dom';
-import { faEnvelope, faLock, faUser, faImage, faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faLock, faUser, faImage, faEyeSlash, faEye, } from '@fortawesome/free-solid-svg-icons'
 import { AuthContext } from '../../context/AuthProvider';
 import toast from 'react-hot-toast';
+import google from '../../assets/google.png'
+import github from '../../assets/github.png'
 const Register = () => {
-    const { createPasswordBasedUser, userUpdated } = useContext(AuthContext)
+    const { createPasswordBasedUser, userUpdated, loginWithGoogle } = useContext(AuthContext)
     const [status, setStatus] = useState(false)
     const navigate = useNavigate()
     const handleUserRegister = event => {
@@ -22,23 +24,40 @@ const Register = () => {
         createPasswordBasedUser(email, password)
             .then(res => {
                 const user = res.user
-                    userUpdated(profile)
-                        .then(res => {
-                            toast.success('Account created successfully!!')
-                            form.reset()
-                            console.log(user)
-                            navigate('/')
-                        })
-                        .catch(err => {
-                            console.log(err)
-                            toast.error(err.message)
-                        })
+                userUpdated(profile)
+                    .then(res => {
+                        toast.success('Account created successfully!!')
+                        form.reset()
+                        console.log(user)
+                        navigate('/')
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        toast.error(err.message)
+                    })
 
             })
             .catch(err => {
                 console.log(err)
                 toast.error(err.message)
             })
+    }
+    const handleGoogleLogin = () => {
+        loginWithGoogle()
+            .then(res => {
+                console.log(res)
+                toast.success('You are Login successfully!')
+                navigate('/')
+
+            })
+            .catch((e) => {
+                console.log(e)
+                toast.error(e.message)
+            })
+    }
+
+    const handleGithubLogin = () => {
+        toast('Github login implement pending...')
     }
     return (
         <div className='grid grid-cols-1 md:grid-cols-2 m-5 shadow-2xl rounded-3xl'>
@@ -52,7 +71,12 @@ const Register = () => {
             <div className='p-5 grid place-items-center'>
                 <div>
                     <h2 className='text-center my-5 text-green-700 font-bold text-2xl'>Create Account</h2>
-                    <form onSubmit={handleUserRegister} className='w-[250px] md:w-[300px]'>
+                    <div className='my-3 flex justify-center items-center'>
+                        <img onClick={handleGoogleLogin} className='w-8 h-8 rounded-full mx-2 cursor-pointer hover:scale-110' src={google} alt="" />
+                        <img onClick={handleGithubLogin} className='w-8 h-8 rounded-full mx-2 cursor-pointer hover:scale-110' src={github} alt="" />
+                    </div>
+                    <hr />
+                    <form onSubmit={handleUserRegister} className='mt-5 w-[250px] md:w-[300px]'>
                         <div className="form-control relative mb-3">
                             <FontAwesomeIcon className='absolute top-1/3 left-2 w-5 h-5 text-gray-400 ml-3' icon={faUser}></FontAwesomeIcon>
                             <input required name='name' type="text" placeholder="Name" className="input bg-gray-100  w-full max-w-xs pl-12" />
