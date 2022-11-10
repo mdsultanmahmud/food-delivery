@@ -7,6 +7,7 @@ import Home from "./pages/home/Home/Home"
 import Login from "./pages/Login/Login"
 import Register from "./pages/Register/Register"
 import Reviews from "./pages/Reviews/Reviews"
+import UpdateReview from "./pages/Reviews/UpdateReview"
 import Services from "./pages/Services/Services"
 import PrivateRoutes from "./Routes/PrivateRoutes"
 import ServiceDetails from "./sharedPages/ServiceDetails/ServiceDetails"
@@ -50,6 +51,11 @@ function App() {
             path:'/serviceDetails/:id',
             element:<ServiceDetails></ServiceDetails>,
             loader: ({params}) => fetch(`http://localhost:5000/services/${params.id}`)
+          },
+          {
+            path:'/updateReview/:id',
+            element:<UpdateReview></UpdateReview>,
+            loader: ({params}) => fetch(`http://localhost:5000/reviews/${params.id}`)
           }
         ]
       }

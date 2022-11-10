@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const DisplayReview = ({ singleRev,handleDeleteReview }) => {
-    const { serviceName, serviceImg, serviceTitle, reviewMsg,reviewtime, serviceId, _id} = singleRev
-   
+const DisplayReview = ({ singleRev, handleDeleteReview }) => {
+    const { serviceName, serviceImg, serviceTitle, reviewMsg, reviewtime, serviceId, _id } = singleRev
+
     return (
         <div className='my-5 shadow-xl bg-bage-100 p-5'>
             <div className='grid gap-2 grid-cols-1 md:grid-cols-2'>
@@ -21,9 +21,13 @@ const DisplayReview = ({ singleRev,handleDeleteReview }) => {
             </div>
             <div className='text-center my-5'>
                 <button onClick={() => handleDeleteReview(_id)} className='mt-3 mx-0 md:mx-3 font-bold px-12 py-2 bg-gradient-to-tr from-blue-600 to-pink-800 hover:from-green-400 hover:to-orange-700 text-white text-lg uppercase'>Delete</button>
-                <button className='mt-3 mx-0 md:mx-3 font-bold px-12 py-2 bg-gradient-to-tr from-blue-600 to-pink-800 hover:from-green-400 hover:to-orange-700 text-white text-lg uppercase'>update</button>
+                <Link to={`/updateReview/${_id}`}><button className='mt-3 mx-0 md:mx-3 font-bold px-12 py-2 bg-gradient-to-tr from-blue-600 to-pink-800 hover:from-green-400 hover:to-orange-700 text-white text-lg uppercase'>update</button></Link>
+
             </div>
+
+
         </div>
+
     );
 };
 
