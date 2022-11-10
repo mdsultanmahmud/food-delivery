@@ -20,15 +20,26 @@ const Login = () => {
         LoginUser(email, password)
             .then(res => {
                 const user = res.user
+                const currentUser  = {
+                    email: user.email 
+                }
+                // get jwt token 
+                fetch('http://localhost:5000/jwt',{
+                    method:'POST',
+                    headers:{
+                        'content-type':'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                .then(res => res.json())
+                .then(data =>{
+                    console.log(data)
+                    localStorage.setItem('token', data.token)
+                })
 
                 if (user) {
                     toast.success('Login successfully!')
-
-                    const currentUser = {
-                        email: user.email
-                    }
-                    console.log(user)
-                    getJWTToken(currentUser)
+                    // console.log(user)
                     form.reset()
                     navigate(from, { replace: true })
                 }
@@ -39,21 +50,6 @@ const Login = () => {
             })
     }
 
-    // get jwt token 
-    const getJWTToken = (crrUser) => {
-        fetch('https://food-delivery-server-mu.vercel.app/jwt', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(crrUser)
-        })
-            .then(res => res.json())
-            .then(data => {
-                localStorage.setItem('access_token', data.token)
-                console.log(data)
-            })
-    }
     return (
         <div className='grid grid-cols-1 md:grid-cols-2 m-10 shadow-2xl rounded-3xl '>
             <Helmet>

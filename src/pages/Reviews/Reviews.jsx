@@ -6,12 +6,12 @@ import { Helmet } from 'react-helmet';
 const Reviews = () => {
     const [reviews, setReviews] = useState([])
     const [deleteStatus, setDeleteStatus] = useState(false)
-    const { user } = useContext(AuthContext)
+    const { user,userLogout } = useContext(AuthContext)
 
     const handleDeleteReview = (id) => {
         const agreed = prompt('For deleting this review, please write CONFIRM');
         if (agreed === 'CONFIRM') {
-            fetch(`https://food-delivery-server-mu.vercel.app/reviewWithGmail/${id}`, {
+            fetch(`http://localhost:5000/reviewWithGmail/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())
@@ -25,15 +25,25 @@ const Reviews = () => {
         }
 
     }
+
     useEffect(() => {
-        fetch(`https://food-delivery-server-mu.vercel.app/reviewWithGmail?email=${user?.email}`,{
+        fetch(`http://localhost:5000/reviewWithGmail?email=${user?.email}`,{
             headers:{
-                authAccessToken: `Bearer ${localStorage.getItem('access_token')}`
+                accesstoken: `Bearer ${localStorage.getItem('token')}`
             }
         })
-            .then(res => res.json())
-            .then(data => setReviews(data))
-    }, [deleteStatus])
+            .then(res => {
+                if(res.status === 401){
+                    userLogout()
+                }
+                return res.json()
+            })
+            .then(data => {
+                console.log(data)
+                setReviews(data)
+            })
+    }, [deleteStatus, user?.email])
+
     return (
         <div>
             <Helmet>

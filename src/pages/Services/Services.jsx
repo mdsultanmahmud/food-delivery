@@ -2,10 +2,8 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { useLoaderData } from 'react-router-dom';
 import SingleService from './SingleService';
-
 const Services = () => {
     const services = useLoaderData()
-        
     return (
         <div>
             <Helmet>

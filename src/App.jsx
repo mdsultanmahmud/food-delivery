@@ -25,7 +25,7 @@ function App() {
           {
             path:'/services',
             element:<Services></Services>,
-            loader: () => fetch('https://food-delivery-server-mu.vercel.app/services')
+            loader: () => fetch('http://localhost:5000/services')
           },
           {
             path:'/blog',
@@ -50,12 +50,12 @@ function App() {
           {
             path:'/serviceDetails/:id',
             element:<ServiceDetails></ServiceDetails>,
-            loader: ({params}) => fetch(`https://food-delivery-server-mu.vercel.app/services/${params.id}`)
+            loader: ({params}) => fetch(`http://localhost:5000/services/${params.id}`)
           },
           {
             path:'/updateReview/:id',
             element:<UpdateReview></UpdateReview>,
-            loader: ({params}) => fetch(`https://food-delivery-server-mu.vercel.app/reviews/${params.id}`)
+            loader: ({params}) => fetch(`http://localhost:5000/reviews/${params.id}`)
           }
         ]
       }

@@ -12,7 +12,7 @@ const ServiceDetails = () => {
     const { name, title, description, review, _id, picture, rating, balance, time } = service
 
     useEffect(() => {
-        fetch(`https://food-delivery-server-mu.vercel.app/reviewWithId/${_id}`)
+        fetch(`http://localhost:5000/reviewWithId/${_id}`)
             .then(res => res.json())
             .then(data => {
                 // console.log(data)
