@@ -25,7 +25,11 @@ const Reviews = () => {
 
     }
     useEffect(() => {
-        fetch(`http://localhost:5000/reviewWithGmail?email=${user?.email}`)
+        fetch(`http://localhost:5000/reviewWithGmail?email=${user?.email}`,{
+            headers:{
+                authToken: `Bearer ${localStorage.getItem('access_token')}`
+            }
+        })
             .then(res => res.json())
             .then(data => setReviews(data))
     }, [deleteStatus])

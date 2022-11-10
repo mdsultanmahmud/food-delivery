@@ -15,19 +15,40 @@ const Login = () => {
         const form = e.target
         const email = form.email.value
         const password = form.password.value
+
         LoginUser(email, password)
             .then(res => {
                 const user = res.user
                 if (user) {
                     toast.success('Login successfully!')
+                    const currentUser = {
+                        email: user.email
+                    }
                     console.log(user)
+                    getJWTToken(currentUser)
                     form.reset()
-                    navigate(from, {replace: true})
+                    navigate(from, { replace: true })
                 }
             })
             .catch(e => {
                 console.log(e)
                 toast.error(e.message)
+            })
+    }
+
+    // get jwt token 
+    const getJWTToken = (crrUser) => {
+        fetch('http://localhost:5000/jwt', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(crrUser)
+        })
+            .then(res => res.json())
+            .then(data => {
+                localStorage.setItem('access_token', data.token)
+                console.log(data)
             })
     }
     return (
