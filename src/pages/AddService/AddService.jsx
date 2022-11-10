@@ -18,7 +18,7 @@ const AddService = () => {
             review: form.review.value,
             sortingTime: day.getTime()
         }
-        fetch('http://localhost:5000/services', {
+        fetch('https://food-delivery-server-mu.vercel.app/services', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
