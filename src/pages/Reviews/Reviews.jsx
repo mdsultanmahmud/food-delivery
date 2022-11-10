@@ -11,7 +11,7 @@ const Reviews = () => {
     const handleDeleteReview = (id) => {
         const agreed = prompt('For deleting this review, please write CONFIRM');
         if (agreed === 'CONFIRM') {
-            fetch(`http://localhost:5000/reviewWithGmail/${id}`, {
+            fetch(`https://food-delivery-server-mu.vercel.app/reviewWithGmail/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())
@@ -26,7 +26,7 @@ const Reviews = () => {
 
     }
     useEffect(() => {
-        fetch(`http://localhost:5000/reviewWithGmail?email=${user?.email}`,{
+        fetch(`https://food-delivery-server-mu.vercel.app/reviewWithGmail?email=${user?.email}`,{
             headers:{
                 authAccessToken: `Bearer ${localStorage.getItem('access_token')}`
             }

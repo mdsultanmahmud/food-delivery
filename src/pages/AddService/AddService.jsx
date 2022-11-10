@@ -3,34 +3,36 @@ import { Helmet } from 'react-helmet';
 import toast from 'react-hot-toast';
 
 const AddService = () => {
-    const handleAddService = event =>{
+    const handleAddService = event => {
+        const day = new Date()
         event.preventDefault()
         const form = event.target
         const addedService = {
-            balance: '$'+ form.price.value,
+            balance: '$' + form.price.value,
             picture: form.img.value,
             time: form.time.value,
             title: form.title.value,
             name: form.name.value,
-            description: form.description.value, 
+            description: form.description.value,
             rating: form.rating.value,
-            review: form.review.value  
+            review: form.review.value,
+            sortingTime: day.getTime()
         }
-        fetch('http://localhost:5000/services',{
-            method:'POST',
-            headers:{
+        fetch('https://food-delivery-server-mu.vercel.app/services', {
+            method: 'POST',
+            headers: {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(addedService)
         })
-        .then(res =>res.json())
-        .then(data =>{
-            console.log(data)
-            if(data.acknowledged){
-                toast.success('Service added successfully!!')
-                form.reset()
-            }
-        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.acknowledged) {
+                    toast.success('Service added successfully!!')
+                    form.reset()
+                }
+            })
     }
     return (
         <div>

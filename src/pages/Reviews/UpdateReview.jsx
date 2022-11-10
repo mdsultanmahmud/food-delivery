@@ -25,7 +25,7 @@ const UpdateReview = () => {
                 time: day.toLocaleTimeString()
             }
         }
-        fetch(`http://localhost:5000/reviews/${savedReview._id}`,{
+        fetch(`https://food-delivery-server-mu.vercel.app/reviews/${savedReview._id}`,{
             method:'PUT',
             headers:{
                 'content-type': 'application/json'

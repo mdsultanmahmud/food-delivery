@@ -19,13 +19,14 @@ const ReviewForm = ({service}) => {
             serviceId: _id,
             serviceImg: picture,
             serviceTitle: title,
+            sortingTime: today.getTime(),
             reviewtime: {
                 date: today.toLocaleDateString(),
                 time: today.toLocaleTimeString()
             }
         }
         
-        fetch('http://localhost:5000/reviews',{
+        fetch('https://food-delivery-server-mu.vercel.app/reviews',{
             method:'POST',
             headers: {
                 'content-type': 'application/json'

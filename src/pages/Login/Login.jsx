@@ -41,7 +41,7 @@ const Login = () => {
 
     // get jwt token 
     const getJWTToken = (crrUser) => {
-        fetch('http://localhost:5000/jwt', {
+        fetch('https://food-delivery-server-mu.vercel.app/jwt', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
