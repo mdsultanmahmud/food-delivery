@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import toast from 'react-hot-toast';
 
 const AddService = () => {
@@ -33,6 +34,9 @@ const AddService = () => {
     }
     return (
         <div>
+            <Helmet>
+                <title>Fast Delivery - Add Service</title>
+            </Helmet>
             <h1 className='text-center text-gray-500 font-bold text-2xl mt-5'>Add a service</h1>
             <p className='text-center text-sm font-bold text-red-700'>This is food delivery website, please add a food which made from home and serve people!</p>
             <div className='my-10shadow-lg p-5 flex justify-center items-center'>

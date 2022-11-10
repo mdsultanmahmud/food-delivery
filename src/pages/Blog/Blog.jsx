@@ -1,8 +1,12 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 
 const Blog = () => {
     return (
         <div className='m-5 w-full md:w-3/4 mx-auto'>
+            <Helmet>
+                <title>Fast Delivery - Blog</title>
+            </Helmet>
             <h3 className='text-center text-2xl font-bold text-orange-700 my-5'>Our blog</h3>
 
             <div tabIndex={0} className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box">

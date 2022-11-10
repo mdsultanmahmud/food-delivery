@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/AuthProvider';
 import DisplayReview from './DisplayReview';
 import toast from 'react-hot-toast';
+import { Helmet } from 'react-helmet';
 const Reviews = () => {
     const [reviews, setReviews] = useState([])
     const [deleteStatus, setDeleteStatus] = useState(false)
@@ -35,6 +36,9 @@ const Reviews = () => {
     }, [deleteStatus])
     return (
         <div>
+            <Helmet>
+                <title>Fast Delivery - My Review</title>
+            </Helmet>
             {
                 reviews.length > 0 ?
                     <h3 className='text-center my-5 text-2xl font-bold text-orange-700'>Your all Reviews</h3>

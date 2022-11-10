@@ -4,6 +4,7 @@ import { faEnvelope, faLock, faEyeSlash, faEye } from '@fortawesome/free-solid-s
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
 import toast from 'react-hot-toast';
+import { Helmet } from 'react-helmet';
 const Login = () => {
     const { LoginUser } = useContext(AuthContext)
     const [status, setStatus] = useState(false)
@@ -55,7 +56,9 @@ const Login = () => {
     }
     return (
         <div className='grid grid-cols-1 md:grid-cols-2 m-10 shadow-2xl rounded-3xl '>
-
+            <Helmet>
+                <title>Fast Delivery - Login</title>
+            </Helmet>
             <div className='p-5 grid place-items-center'>
                 <div>
                     <h2 className='text-center my-5 text-green-700 font-bold text-2xl'>Please Sign In</h2>

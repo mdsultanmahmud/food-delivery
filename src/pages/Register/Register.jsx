@@ -6,6 +6,7 @@ import { AuthContext } from '../../context/AuthProvider';
 import toast from 'react-hot-toast';
 import google from '../../assets/google.png'
 import github from '../../assets/github.png'
+import { Helmet } from 'react-helmet';
 const Register = () => {
     const { createPasswordBasedUser, userUpdated, loginWithGoogle,registerStatus,setRegisterStatus, } = useContext(AuthContext)
     const [status, setStatus] = useState(false)
@@ -62,6 +63,9 @@ const Register = () => {
     }
     return (
         <div className='grid grid-cols-1 md:grid-cols-2 m-5 shadow-2xl rounded-3xl'>
+            <Helmet>
+                <title>Fast Delivery - Register</title>
+            </Helmet>
             <div className='p-5 bg-gradient-to-r from-green-700 to-pink-500 rounded-t-3xl md:rounded-l-3xl md:rounded-tr-none grid place-items-center'>
                 <div>
                     <h2 className='text-3xl my-2 text-white font-bold '>Welcome Back!</h2>
