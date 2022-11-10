@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 import google from '../../assets/google.png'
 import github from '../../assets/github.png'
 const Register = () => {
-    const { createPasswordBasedUser, userUpdated, loginWithGoogle } = useContext(AuthContext)
+    const { createPasswordBasedUser, userUpdated, loginWithGoogle,registerStatus,setRegisterStatus, } = useContext(AuthContext)
     const [status, setStatus] = useState(false)
     const navigate = useNavigate()
     const handleUserRegister = event => {
@@ -29,6 +29,7 @@ const Register = () => {
                         toast.success('Account created successfully!!')
                         form.reset()
                         console.log(user)
+                        setRegisterStatus(!registerStatus)
                         navigate('/')
                     })
                     .catch(err => {

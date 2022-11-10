@@ -19,8 +19,10 @@ const Login = () => {
         LoginUser(email, password)
             .then(res => {
                 const user = res.user
+
                 if (user) {
                     toast.success('Login successfully!')
+
                     const currentUser = {
                         email: user.email
                     }

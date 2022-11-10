@@ -6,6 +6,7 @@ const auth = getAuth(app)
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState({})
     const [loading, setLoading] = useState(true)
+    const [registerStatus, setRegisterStatus] = useState(false)
     const googleProvider = new GoogleAuthProvider()
     const createPasswordBasedUser = (email, password) => {
         setLoading(true)
@@ -42,8 +43,8 @@ const AuthProvider = ({ children }) => {
         })
 
         return () => unsubscribe()
-    }, [])
-    const authInfo = { user, loading, createPasswordBasedUser, userUpdated, LoginUser, userLogout,loginWithGoogle }
+    }, [registerStatus])
+    const authInfo = { user, loading,registerStatus,setRegisterStatus, createPasswordBasedUser, userUpdated, LoginUser, userLogout,loginWithGoogle }
     return (
         <AuthContext.Provider value={authInfo}>
             {children}
