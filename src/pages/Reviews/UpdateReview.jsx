@@ -19,6 +19,7 @@ const UpdateReview = () => {
             serviceImg,
             serviceName,
             serviceTitle,
+            sortingTime: day.getTime(),
             reviewMsg: updateText,
             reviewtime:{
                 date: day.toLocaleDateString(),

@@ -1,14 +1,14 @@
 import React, { useContext, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link, useNavigate } from 'react-router-dom';
-import { faEnvelope, faLock, faUser, faImage, faEyeSlash, faEye, } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faLock, faUser, faImage, faEyeSlash, faEye, faL, } from '@fortawesome/free-solid-svg-icons'
 import { AuthContext } from '../../context/AuthProvider';
 import toast from 'react-hot-toast';
 import google from '../../assets/google.png'
 import github from '../../assets/github.png'
 import { Helmet } from 'react-helmet';
 const Register = () => {
-    const { createPasswordBasedUser, userUpdated, loginWithGoogle,registerStatus,setRegisterStatus, } = useContext(AuthContext)
+    const { createPasswordBasedUser, userUpdated, loginWithGoogle, registerStatus, setRegisterStatus} = useContext(AuthContext)
     const [status, setStatus] = useState(false)
     const navigate = useNavigate()
     const handleUserRegister = event => {

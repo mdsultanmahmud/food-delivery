@@ -6,7 +6,7 @@ import { AuthContext } from '../../context/AuthProvider';
 import toast from 'react-hot-toast';
 import { Helmet } from 'react-helmet';
 const Login = () => {
-    const { LoginUser } = useContext(AuthContext)
+    const { LoginUser, loading } = useContext(AuthContext)
     const [status, setStatus] = useState(false)
     const location = useLocation()
     const navigate = useNavigate()
@@ -20,8 +20,8 @@ const Login = () => {
         LoginUser(email, password)
             .then(res => {
                 const user = res.user
-                const currentUser  = {
-                    email: user.email 
+                const currentUser = {
+                    email: user.email
                 }
                 // get jwt token 
                 fetch('https://food-delivery-server-mu.vercel.app/jwt',{
@@ -31,11 +31,11 @@ const Login = () => {
                     },
                     body: JSON.stringify(currentUser)
                 })
-                .then(res => res.json())
-                .then(data =>{
-                    console.log(data)
-                    localStorage.setItem('token', data.token)
-                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data)
+                        localStorage.setItem('token', data.token)
+                    })
 
                 if (user) {
                     toast.success('Login successfully!')

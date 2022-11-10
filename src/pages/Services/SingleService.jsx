@@ -27,7 +27,13 @@ const SingleService = ({ service }) => {
                         <input type="radio" name="rating-6" className="mask mask-star-2 bg-orange-400" />
                     </div>
                 </div>
+                <div>
+                    <p className='text-gray-500 text-sm text-semibold'>
+                        <strong>Description:</strong> {description.slice(0,100)}...
+                    </p>
+                </div>
                 <div className="card-actions justify-end">
+
                     <Link to={`/serviceDetails/${_id}`}><button className="btn btn-warning px-12 btn-outline">Details</button></Link>
                 </div>
             </div>

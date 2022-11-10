@@ -25,7 +25,6 @@ function App() {
           {
             path:'/services',
             element:<Services></Services>,
-            loader: () => fetch('https://food-delivery-server-mu.vercel.app/services')
           },
           {
             path:'/blog',
